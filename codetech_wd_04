@@ -1,0 +1,17 @@
+!pip install scikit-surprise
+import pandas as pd
+df = pd.read_csv('movies.csv') 
+from surprise import Dataset, Reader, SVD
+from surprise.model_selection import train_test_split
+from surprise import accuracy
+reader = Reader(rating_scale=(1, 5))
+data = Dataset.load_from_df(df[['id', 'revenue', 'popularity']], reader)
+trainset, testset = train_test_split(data, test_size=0.2)
+model = SVD()
+model.fit(trainset)
+predictions = model.test(testset)
+accuracy.rmse(predictions)
+user_id = 1  
+item_id = 50 
+predicted_rating = model.predict(user_id, item_id)
+print(f"Predicted rating for user {user_id} on item {item_id}: {predicted_rating.est}")
