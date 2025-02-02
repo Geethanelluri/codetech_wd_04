@@ -1,0 +1,1 @@
+This project aims to build a Recommendation System that suggests relevant items to users based on their past interactions. We employ Collaborative Filtering and Matrix Factorization (SVD) techniques to generate recommendations
